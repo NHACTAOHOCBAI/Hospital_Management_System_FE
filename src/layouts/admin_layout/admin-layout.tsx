@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/app-sidebar"
+import { AppSidebar } from "@/layouts/admin_layout/app-sidebar"
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -49,7 +49,7 @@ export default function AdminLayout() {
                         </Breadcrumb>
                     </div>
                 </header>
-                <div className="flex flex-1 flex-col gap-4 p-4  bg-amber-100">
+                <div className="flex flex-1 flex-col gap-4 p-4  ">
                     <Outlet />
                 </div>
             </SidebarInset>

@@ -1,4 +1,4 @@
-import AdminLayout from "@/layouts/admin_layout/AdminLayout";
+import AdminLayout from "@/layouts/admin_layout/admin-layout";
 import Users from "@/pages/admin/user/page";
 import { createBrowserRouter } from "react-router";
 
@@ -10,7 +10,7 @@ const router = createBrowserRouter([
             {
                 path: "users/view-users",
                 element: <Users />
-            }
+            },
         ]
     }
 ]);

@@ -4,6 +4,7 @@
 			"blue-100": { "$value": "#E6F0FA" },
 			"blue-300": { "$value": "#80BFFF" },
 			"blue-500": { "$value": "#1E90FF" },
+			"blue-600": { "$value": "#2563EB" },
 			"blue-700": { "$value": "#1565C0" },
 			"blue-900": { "$value": "#0D47A1" }
 		},

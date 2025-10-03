@@ -82,6 +82,22 @@ export function RegisterForm({ className, ...props }: React.ComponentProps<'div'
 									required
 								/>
 							</div>
+							<div className="grid gap-1.5">
+								<Label
+									htmlFor="confirmPassword"
+									className="text-xs font-medium text-neutral-950 sm:text-sm"
+								>
+									Confirm Password
+								</Label>
+								<Input
+									id="confirmPassword"
+									name="confirmPassword"
+									type="confirmPassword"
+									autoComplete="new-password"
+									className="h-10 rounded-lg border-neutral-200 bg-white sm:h-11"
+									required
+								/>
+							</div>
 						</div>
 						<Button
 							type="submit"

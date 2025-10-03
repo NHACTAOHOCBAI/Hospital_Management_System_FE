@@ -1,15 +1,11 @@
+import { LoginForm } from "@/components/auth/login-form";
 
-
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-
-export default function Login() {
+export default function Page() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
-            <h1 className="text-4xl">Login Page</h1>
-            <Button asChild>
-                <Link to="/register">Register</Link>
-            </Button>
+        <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+            <div className="w-full max-w-sm">
+                <LoginForm />
+            </div>
         </div>
-    );
+    )
 }

@@ -2,7 +2,8 @@ import axios from "axios"
 
 const axiosConfig = () => {
     const instance = axios.create({
-        baseURL: process.env.BACKEND_URL,
+        // baseURL: process.env.BACKEND_URL,
+        // chờ backend
         headers: {
             "Content-Type": "application/json",
         },

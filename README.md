@@ -1,2 +1,3 @@
 This is HMS_FE
 Updating...
+D:\project\Hospital_Management_System_FE\src\components\ui : đây là các component tải từ shadcn

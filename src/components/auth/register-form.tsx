@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
-import { toast } from "sonner";
+import { SiGoogle } from "react-icons/si";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,58 +13,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { useRegisterUser } from "@/hooks/queries/useUser";
+import { useRegisterForm } from "@/hooks/useRegisterForm";
 import { cn } from "@/lib/utils";
-
-const googleLogo = "/public/assets/image_google.png";
 
 export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const { mutate: register, isPending } = useRegisterUser();
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      toast.error("Passwords do not match!");
-      return;
-    }
-
-    register(
-      {
-        fullName: formData.username,
-        email: formData.email,
-        password: formData.password,
-      },
-      {
-        onSuccess: () => {
-          toast.success("Registration successful!");
-          setFormData({
-            username: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-          });
-        },
-        onError: (error) => {
-          toast.error(`Registration failed: ${error.message}`);
-        },
-      }
-    );
-  };
+  const { formData, isPending, handleChange, handleSubmit } = useRegisterForm();
 
   return (
     <div className={cn("w-full", className)} {...props}>
@@ -83,11 +38,17 @@ export function RegisterForm({
             className="flex flex-col gap-5 sm:gap-6"
             onSubmit={handleSubmit}
           >
-            <div className="grid gap-3.5 text-left sm:gap-4">
+            <div
+              className="grid gap-3.5 text-left sm:gap-4 group"
+              data-disabled={isPending}
+            >
               <div className="grid gap-1.5">
                 <Label
                   htmlFor="username"
-                  className="text-xs font-medium text-neutral-950 sm:text-sm"
+                  className={cn(
+                    "text-xs font-medium text-neutral-950 sm:text-sm",
+                    isPending && "opacity-60"
+                  )}
                 >
                   Username
                 </Label>
@@ -95,16 +56,23 @@ export function RegisterForm({
                   id="username"
                   name="username"
                   autoComplete="username"
-                  className="h-10 rounded-lg border-neutral-200 bg-white sm:h-11"
+                  className={cn(
+                    "h-10 rounded-lg border-neutral-200 bg-white sm:h-11",
+                    isPending && "text-muted-foreground"
+                  )}
                   required
                   value={formData.username}
                   onChange={handleChange}
+                  disabled={isPending}
                 />
               </div>
               <div className="grid gap-1.5">
                 <Label
                   htmlFor="email"
-                  className="text-xs font-medium text-neutral-950 sm:text-sm"
+                  className={cn(
+                    "text-xs font-medium text-neutral-950 sm:text-sm",
+                    isPending && "opacity-60"
+                  )}
                 >
                   Email
                 </Label>
@@ -113,16 +81,23 @@ export function RegisterForm({
                   name="email"
                   type="email"
                   autoComplete="email"
-                  className="h-10 rounded-lg border-neutral-200 bg-white sm:h-11"
+                  className={cn(
+                    "h-10 rounded-lg border-neutral-200 bg-white sm:h-11",
+                    isPending && "text-muted-foreground"
+                  )}
                   required
                   value={formData.email}
                   onChange={handleChange}
+                  disabled={isPending}
                 />
               </div>
               <div className="grid gap-1.5">
                 <Label
                   htmlFor="password"
-                  className="text-xs font-medium text-neutral-950 sm:text-sm"
+                  className={cn(
+                    "text-xs font-medium text-neutral-950 sm:text-sm",
+                    isPending && "opacity-60"
+                  )}
                 >
                   Password
                 </Label>
@@ -131,16 +106,23 @@ export function RegisterForm({
                   name="password"
                   type="password"
                   autoComplete="new-password"
-                  className="h-10 rounded-lg border-neutral-200 bg-white sm:h-11"
+                  className={cn(
+                    "h-10 rounded-lg border-neutral-200 bg-white sm:h-11",
+                    isPending && "text-muted-foreground"
+                  )}
                   required
                   value={formData.password}
                   onChange={handleChange}
+                  disabled={isPending}
                 />
               </div>
               <div className="grid gap-1.5">
                 <Label
                   htmlFor="confirmPassword"
-                  className="text-xs font-medium text-neutral-950 sm:text-sm"
+                  className={cn(
+                    "text-xs font-medium text-neutral-950 sm:text-sm",
+                    isPending && "opacity-60"
+                  )}
                 >
                   Confirm Password
                 </Label>
@@ -149,10 +131,14 @@ export function RegisterForm({
                   name="confirmPassword"
                   type="password"
                   autoComplete="new-password"
-                  className="h-10 rounded-lg border-neutral-200 bg-white sm:h-11"
+                  className={cn(
+                    "h-10 rounded-lg border-neutral-200 bg-white sm:h-11",
+                    isPending && "text-muted-foreground"
+                  )}
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
+                  disabled={isPending}
                 />
               </div>
             </div>
@@ -171,12 +157,7 @@ export function RegisterForm({
             type="button"
             className="flex items-center gap-2 text-xs font-medium text-blue-600 transition-colors hover:text-blue-600/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/40 sm:text-sm"
           >
-            <img
-              src={googleLogo}
-              alt="Google icon"
-              className="h-4 w-4 sm:h-5 sm:w-5"
-              loading="lazy"
-            />
+            <SiGoogle size={18} color="red" />
             <span>Sign up with Google</span>
           </button>
           <p className="text-center text-xs text-slate-600 sm:text-sm">

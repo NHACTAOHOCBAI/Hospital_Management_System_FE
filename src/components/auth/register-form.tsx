@@ -11,16 +11,23 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { useRegisterForm } from "@/hooks/useRegisterForm";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { useRegisterForm } from "@/pages/auth/register/useRegisterForm";
 import { cn } from "@/lib/utils";
 
 export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const { formData, isPending, handleChange, handleSubmit } = useRegisterForm();
+  const { form, onSubmit, isPending } = useRegisterForm();
 
   return (
     <div className={cn("w-full", className)} {...props}>
@@ -34,122 +41,143 @@ export function RegisterForm({
           </CardDescription>
         </CardHeader>
         <CardContent className="px-4 pb-4 pt-0 sm:px-6 sm:pb-5">
-          <form
-            className="flex flex-col gap-5 sm:gap-6"
-            onSubmit={handleSubmit}
-          >
-            <div
-              className="grid gap-3.5 text-left sm:gap-4 group"
-              data-disabled={isPending}
+          <Form {...form}>
+            <form
+              className="flex flex-col gap-5 sm:gap-6"
+              onSubmit={form.handleSubmit(onSubmit)}
             >
-              <div className="grid gap-1.5">
-                <Label
-                  htmlFor="username"
-                  className={cn(
-                    "text-xs font-medium text-neutral-950 sm:text-sm",
-                    isPending && "opacity-60"
-                  )}
-                >
-                  Username
-                </Label>
-                <Input
-                  id="username"
+              <div
+                className="grid gap-3.5 text-left sm:gap-4 group"
+                data-disabled={isPending}
+              >
+                <FormField
+                  control={form.control}
                   name="username"
-                  autoComplete="username"
-                  className={cn(
-                    "h-10 rounded-lg border-neutral-200 bg-white sm:h-11",
-                    isPending && "text-muted-foreground"
+                  render={({ field }) => (
+                    <FormItem className="grid gap-1.5">
+                      <FormLabel
+                        className={cn(
+                          "text-xs font-medium text-neutral-950 sm:text-sm",
+                          isPending && "opacity-60"
+                        )}
+                      >
+                        Username
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          autoComplete="username"
+                          className={cn(
+                            "h-10 rounded-lg border-neutral-200 bg-white sm:h-11",
+                            isPending && "text-muted-foreground"
+                          )}
+                          disabled={isPending}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-xs text-red-600" />
+                    </FormItem>
                   )}
-                  required
-                  value={formData.username}
-                  onChange={handleChange}
-                  disabled={isPending}
                 />
-              </div>
-              <div className="grid gap-1.5">
-                <Label
-                  htmlFor="email"
-                  className={cn(
-                    "text-xs font-medium text-neutral-950 sm:text-sm",
-                    isPending && "opacity-60"
-                  )}
-                >
-                  Email
-                </Label>
-                <Input
-                  id="email"
+
+                <FormField
+                  control={form.control}
                   name="email"
-                  type="email"
-                  autoComplete="email"
-                  className={cn(
-                    "h-10 rounded-lg border-neutral-200 bg-white sm:h-11",
-                    isPending && "text-muted-foreground"
+                  render={({ field }) => (
+                    <FormItem className="grid gap-1.5">
+                      <FormLabel
+                        className={cn(
+                          "text-xs font-medium text-neutral-950 sm:text-sm",
+                          isPending && "opacity-60"
+                        )}
+                      >
+                        Email
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type="email"
+                          autoComplete="email"
+                          className={cn(
+                            "h-10 rounded-lg border-neutral-200 bg-white sm:h-11",
+                            isPending && "text-muted-foreground"
+                          )}
+                          disabled={isPending}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-xs text-red-600" />
+                    </FormItem>
                   )}
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  disabled={isPending}
                 />
-              </div>
-              <div className="grid gap-1.5">
-                <Label
-                  htmlFor="password"
-                  className={cn(
-                    "text-xs font-medium text-neutral-950 sm:text-sm",
-                    isPending && "opacity-60"
-                  )}
-                >
-                  Password
-                </Label>
-                <Input
-                  id="password"
+
+                <FormField
+                  control={form.control}
                   name="password"
-                  type="password"
-                  autoComplete="new-password"
-                  className={cn(
-                    "h-10 rounded-lg border-neutral-200 bg-white sm:h-11",
-                    isPending && "text-muted-foreground"
+                  render={({ field }) => (
+                    <FormItem className="grid gap-1.5">
+                      <FormLabel
+                        className={cn(
+                          "text-xs font-medium text-neutral-950 sm:text-sm",
+                          isPending && "opacity-60"
+                        )}
+                      >
+                        Password
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type="password"
+                          autoComplete="new-password"
+                          className={cn(
+                            "h-10 rounded-lg border-neutral-200 bg-white sm:h-11",
+                            isPending && "text-muted-foreground"
+                          )}
+                          disabled={isPending}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-xs text-red-600" />
+                    </FormItem>
                   )}
-                  required
-                  value={formData.password}
-                  onChange={handleChange}
-                  disabled={isPending}
                 />
-              </div>
-              <div className="grid gap-1.5">
-                <Label
-                  htmlFor="confirmPassword"
-                  className={cn(
-                    "text-xs font-medium text-neutral-950 sm:text-sm",
-                    isPending && "opacity-60"
-                  )}
-                >
-                  Confirm Password
-                </Label>
-                <Input
-                  id="confirmPassword"
+
+                <FormField
+                  control={form.control}
                   name="confirmPassword"
-                  type="password"
-                  autoComplete="new-password"
-                  className={cn(
-                    "h-10 rounded-lg border-neutral-200 bg-white sm:h-11",
-                    isPending && "text-muted-foreground"
+                  render={({ field }) => (
+                    <FormItem className="grid gap-1.5">
+                      <FormLabel
+                        className={cn(
+                          "text-xs font-medium text-neutral-950 sm:text-sm",
+                          isPending && "opacity-60"
+                        )}
+                      >
+                        Confirm Password
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          type="password"
+                          autoComplete="new-password"
+                          className={cn(
+                            "h-10 rounded-lg border-neutral-200 bg-white sm:h-11",
+                            isPending && "text-muted-foreground"
+                          )}
+                          disabled={isPending}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-xs text-red-600" />
+                    </FormItem>
                   )}
-                  required
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  disabled={isPending}
                 />
               </div>
-            </div>
-            <Button
-              type="submit"
-              className="h-10 w-full rounded-lg bg-blue-600 text-sm font-semibold text-white hover:bg-blue-600/90 sm:h-11 sm:text-base"
-              disabled={isPending}
-            >
-              {isPending ? "Signing up..." : "Sign up"}
-            </Button>
-          </form>
+              <Button
+                type="submit"
+                className="h-10 w-full rounded-lg bg-blue-600 text-sm font-semibold text-white hover:bg-blue-600/90 sm:h-11 sm:text-base"
+                disabled={isPending}
+              >
+                {isPending ? "Signing up..." : "Sign up"}
+              </Button>
+            </form>
+          </Form>
         </CardContent>
         <Separator className="mx-4 bg-slate-200 sm:mx-6" aria-hidden />
         <CardFooter className="flex flex-col items-center gap-3 px-4 pb-5 pt-4 text-sm sm:gap-4 sm:px-6 sm:pb-6 sm:pt-5">

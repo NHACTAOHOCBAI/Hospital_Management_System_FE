@@ -91,6 +91,7 @@ Routing configuration (e.g., `router.tsx`).
 ### services/
 
 Service files for API calls (e.g., `user.service.ts`).
+Note: Currently using mock data instead of API calls
 
 ### styles/
 

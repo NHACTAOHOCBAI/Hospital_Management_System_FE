@@ -17,11 +17,7 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
     return (
         <>
-            <div className="mb-4 flex flex-col items-center gap-2">
-                <img src="/Icon Container.png" alt="Logo" className="h-14 w-14" />
-                <h1 className="text-xl font-semibold">Hospital Management System</h1>
-                <h1>Sign in to access the website</h1>
-            </div>
+
             <div className={cn("flex flex-col gap-6", className)} {...props}>
                 <Card>
                     <CardHeader>

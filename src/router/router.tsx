@@ -6,6 +6,10 @@ import { createBrowserRouter } from "react-router";
 
 const router = createBrowserRouter([
     {
+        path: "/",
+        element: <>landing page</>
+    },
+    {
         path: "admin",
         element: <AdminLayout />,
         children: [
@@ -13,11 +17,8 @@ const router = createBrowserRouter([
                 path: "users/view-users",
                 element: <Users />
             },
+
         ]
-    },
-    {
-        path: "/",
-        element: <AdminLayout />
     },
     {
         path: "/register",

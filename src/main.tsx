@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router";
 import { ThemeProvider } from "next-themes";
 
 import { Toaster } from "@/components/ui/sonner";
+import { UserProvider } from "@/contexts/UserContext";
 import router from "@/router/router.tsx";
 import "./index.css";
 
@@ -14,8 +15,10 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <Toaster />
+        <UserProvider>
+          <RouterProvider router={router} />
+          <Toaster />
+        </UserProvider>
       </QueryClientProvider>
     </ThemeProvider>
   </StrictMode>

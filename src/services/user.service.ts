@@ -89,3 +89,42 @@ export const registerUser = async (
     user: newUser,
   };
 };
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  access_token: string;
+  user: {
+    id: number;
+    email: string;
+    fullName: string;
+  };
+}
+
+// Fake login API (mock)
+export async function loginUser(data: LoginRequest): Promise<LoginResponse> {
+  await new Promise((r) => setTimeout(r, 300)); // mô phỏng delay
+  const user = mockUsers.find(
+    (u) => u.email === data.email && data.password === "12345678"
+  );
+  if (!user) {
+    // Giả lập lỗi đăng nhập
+    const error: any = new Error("Thông tin đăng nhập không hợp lệ");
+    error.response = {
+      data: { message: "Thông tin đăng nhập không hợp lệ" },
+      status: 401,
+    };
+    throw error;
+  }
+  return {
+    access_token: "FAKE_ACCESS_TOKEN",
+    user: {
+      id: user.id,
+      email: user.email,
+      fullName: user.fullName,
+    },
+  };
+}

@@ -2,8 +2,7 @@
 
 import * as React from "react"
 
-import { NavMain } from "@/layouts/admin_layout/nav-main"
-import { NavUser } from "@/layouts/admin_layout/nav-user"
+
 import {
   Sidebar,
   SidebarContent,
@@ -11,6 +10,8 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { ICONS } from "@/constants/icons.enum"
+import { NavMain } from "./nav-main"
+import { NavUser } from "./nav-user"
 
 // This is sample data.
 const data = {

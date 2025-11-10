@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,9 +18,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useLoginForm } from "@/pages/auth/login/useLoginForm";
 import { useLoginUser } from "@/hooks/queries/useLoginUser";
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
+import { useLoginForm } from "@/hooks/useLoginForm";
+import Link from "next/link";
 
 export function LoginForm({
   className,
@@ -138,7 +139,7 @@ export function LoginForm({
         <Separator className="mx-4 bg-slate-200 sm:mx-6" aria-hidden />
         <CardFooter className="flex flex-col items-center gap-3 px-4 pb-5 pt-4 text-sm sm:gap-4 sm:px-6 sm:pb-6 sm:pt-5">
           <Link
-            to="/forgot-password"
+            href="/forgot-password"
             className="inline-block text-sm underline-offset-4 underline text-blue-600 hover:text-blue-600/80"
           >
             Forgot your password?
@@ -146,10 +147,10 @@ export function LoginForm({
           <p className="text-center text-xs text-slate-600 sm:text-sm">
             Don&apos;t have an account?{" "}
             <Link
-              to="/register"
+              href="/auth/register"
               className="font-semibold text-blue-600 hover:text-blue-600/80"
             >
-              Sign up
+              Sign Up
             </Link>
           </p>
         </CardFooter>

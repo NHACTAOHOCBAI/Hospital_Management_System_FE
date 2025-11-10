@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+"use client";
 import { SiGoogle } from "react-icons/si";
 
 import { Button } from "@/components/ui/button";
@@ -20,8 +20,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useRegisterForm } from "@/pages/auth/register/useRegisterForm";
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
+import { useRegisterForm } from "@/hooks/useRegisterForm";
+import Link from "next/link";
 
 export function RegisterForm({
   className,
@@ -191,10 +192,10 @@ export function RegisterForm({
           <p className="text-center text-xs text-slate-600 sm:text-sm">
             Already have an account?{" "}
             <Link
-              to="/login"
+              href="/auth/login"
               className="font-semibold text-blue-600 hover:text-blue-600/80"
             >
-              Log in
+              Login
             </Link>
           </p>
         </CardFooter>

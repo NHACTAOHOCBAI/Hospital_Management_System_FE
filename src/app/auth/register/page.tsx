@@ -1,13 +1,15 @@
-import { LoginForm } from "@/components/auth/login-form";
+import { RegisterForm } from "@/components/auth/register-form";
 import { Hospital } from "lucide-react";
-const backgroundImage = "/public/assets/background 1.png";
-export default function Page() {
+import Image from "next/image";
+export default function Register() {
     return (
         <div className="relative flex min-h-screen items-center justify-center overflow-x-hidden overflow-y-auto">
-            <img
-                src={backgroundImage}
+            <Image
+                src={"/assets/background.png"}
                 alt="Hospital backdrop"
-                className="fixed inset-0 -z-20 h-full w-full object-cover"
+                fill
+                priority
+                className="object-cover -z-20"
             />
             <div className="fixed inset-0 -z-10" />
             <div className="relative z-10 w-full max-w-md px-4 py-6 sm:px-6 sm:py-8 md:max-w-lg md:py-10">
@@ -21,7 +23,7 @@ export default function Page() {
                         </p>
                     </div>
                 </div>
-                <LoginForm className="mt-4 w-full sm:mt-5" />
+                <RegisterForm className="mt-4 w-full sm:mt-5" />
             </div>
         </div>
     );

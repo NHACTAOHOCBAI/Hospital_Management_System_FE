@@ -1,3 +1,4 @@
+"use client";
 import { deleteUsers, getUsers, registerUser } from "@/services/user.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 

@@ -1,9 +1,9 @@
-
+"use client"
 import CrudTable from "@/components/crud_table/crud-table"
 import { Button } from "@/components/ui/button"
 import { useUsers, useDeleteUsers } from "@/hooks/queries/useUser"
-import { userColumns } from "@/pages/admin/user/user-columns"
 import { Plus } from "lucide-react"
+import { userColumns } from "./user-columns"
 
 export default function Users() {
     const handleCreate = () => {

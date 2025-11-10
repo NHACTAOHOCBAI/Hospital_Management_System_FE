@@ -1,4 +1,5 @@
 // CrudTable.tsx
+"use client"
 import React from "react"
 import CustomTable from "@/components/table/custom-table"
 import { DataTablePagination } from "@/components/table/data-table-pagination"

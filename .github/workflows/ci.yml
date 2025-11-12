@@ -22,7 +22,7 @@ jobs:
 
       # 3. Cài dependencies
       - name: Install dependencies
-        run: npm ci
+        run: npm i
 
       # 4. Kiểm tra lint
       - name: Run lint

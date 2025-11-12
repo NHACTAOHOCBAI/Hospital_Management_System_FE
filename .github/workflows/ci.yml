@@ -38,11 +38,13 @@ jobs:
 
       # 6. Kiểm tra lint
       - name: Run lint
-        run: pnpm run lint --if-present
+        run: pnpm run lint
+        continue-on-error: false
 
       # 7. Chạy test (nếu có)
       - name: Run tests
-        run: pnpm test --if-present
+        run: pnpm test
+        continue-on-error: true
 
       # 8. Build thử dự án
       - name: Build Next.js

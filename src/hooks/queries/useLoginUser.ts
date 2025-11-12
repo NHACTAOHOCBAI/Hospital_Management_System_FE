@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 export function useLoginUser() {
   const { setUser } = useUserContext();
   const router = useRouter();
-  return useMutation<LoginResponse, any, LoginRequest>({
+  return useMutation<LoginResponse, Error, LoginRequest>({
     mutationFn: loginUser,
     onSuccess: (data) => {
       localStorage.setItem("access_token", data.access_token);

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/incompatible-library */
 import type { UseQueryResult } from "@tanstack/react-query";
 import { type ColumnDef, getCoreRowModel, type SortingState, useReactTable, type VisibilityState } from "@tanstack/react-table"
 import React from "react"

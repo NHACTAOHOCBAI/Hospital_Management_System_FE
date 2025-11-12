@@ -34,13 +34,14 @@ export function LoginForm({
   // Xử lý submit
   const onSubmit = async (values: { email: string; password: string }) => {
     await loginMutation.mutateAsync(values, {
-      onError: (error: any) => {
+      onError: (error: Error) => {
         // Hiển thị lỗi dưới input
+        const errorMessage = error?.message || "Login failed";
         form.setError("email", {
-          message: error?.response?.data?.message || "Login failed",
+          message: errorMessage,
         });
         form.setError("password", {
-          message: error?.response?.data?.message || "Login failed",
+          message: errorMessage,
         });
       },
     });

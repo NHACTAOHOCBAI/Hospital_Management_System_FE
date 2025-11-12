@@ -20,18 +20,30 @@ jobs:
         with:
           node-version: 20
 
-      # 3. Cài dependencies
+      # 3. Cài pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      # 4. Cài dependencies
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
-      # 4. Kiểm tra lint
+      # 5. Kiểm tra lock file sync
+      - name: Check lockfile is up to date
+        run: |
+          pnpm install --frozen-lockfile
+          git diff --exit-code pnpm-lock.yaml || (echo "pnpm-lock.yaml is out of sync with package.json. Run 'pnpm install' locally and commit the changes." && exit 1)
+
+      # 6. Kiểm tra lint
       - name: Run lint
-        run: npm run lint --if-present
+        run: pnpm run lint --if-present
 
-      # 5. Chạy test (nếu có)
+      # 7. Chạy test (nếu có)
       - name: Run tests
-        run: npm test --if-present
+        run: pnpm test --if-present
 
-      # 6. Build thử dự án
+      # 8. Build thử dự án
       - name: Build Next.js
-        run: npm run build
+        run: pnpm run build

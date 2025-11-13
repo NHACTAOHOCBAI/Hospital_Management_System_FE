@@ -1,17 +1,18 @@
 # General guidelines
 
 - Prefer responsive layouts with Flexbox and Grid; avoid absolute positioning unless necessary.
-- Keep components small, cohesive, and accessible (use semantic HTML, aria-* and focus states).
+- Keep components small, cohesive, and accessible (use semantic HTML, aria-\* and focus states).
 - Use the provided color palette tokens only—do not hardcode hex values.
 - Support light and dark themes. The `.dark` class on a parent enables dark mode.
 - Refactor as you go; keep shared helpers and components in their own files.
 - Use Lucide icons via the shared enum [`ICONS`](src/constants/icons.enum.tsx).
 
---------------
+---
 
 # Design system guidelines
 
 Design tokens and Tailwind theme values are sourced from:
+
 - Color palette JSON: [design/color-pallette.json](design/color-pallette.json)
 - Tailwind token mapping and CSS variables: [src/index.css](src/index.css)
 
@@ -31,17 +32,20 @@ Palette groups (available as Tailwind classes via `@theme inline` in index.css):
   - `*-feedback-success | warning | error | info`
 
 Surface and semantic tokens:
+
 - Surfaces: `bg-background`, `bg-card`, `bg-popover`, `bg-sidebar`
 - Text: `text-foreground`, `text-card-foreground`, `text-muted-foreground`, `text-sidebar-foreground`
 - Borders and rings: `border-border`, `ring-ring`
 - Primary/secondary intents: `bg-primary`, `text-primary-foreground`, `bg-secondary`, etc.
 
 Examples:
+
 - Primary action: `class="bg-primary text-primary-foreground hover:bg-primary/90"`
 - Section surface: `class="bg-card text-card-foreground border"`
 - Subtle feedback: `class="bg-feedback-warning/15 text-feedback-warning"`
 
 Dark mode:
+
 - Wrap the app (or a layout root) with `.dark` to enable the dark token set:
   - Example: `class="dark:bg-background dark:text-foreground"`
   - Custom variant support exists via `@custom-variant dark (&:is(.dark *));` in [src/index.css](src/index.css)
@@ -57,13 +61,14 @@ Dark mode:
 
 - Spacing: Tailwind spacing scale (`p-6`, `px-6`, `gap-6`).
 - Radius: `rounded-md`, `rounded-lg`, `rounded-xl`. Internally, `--radius` powers `--radius-sm|md|lg|xl`.
-- Elevation: `shadow-sm` for surfaces by default; increase only for emphasis.
+- Elevation: `drop-shadow-sm` for surfaces by default; increase only for emphasis.
 
 ## Components (shadcn/ui)
 
 Use the provided components and their variants instead of custom-styling from scratch.
 
 ### Button
+
 - Component: [`Button`](src/components/ui/button.tsx)
 - Variants: `default`, `destructive`, `outline`, `secondary`, `ghost`, `link`
 - Sizes: `default`, `sm`, `lg`, `icon`
@@ -74,6 +79,7 @@ Use the provided components and their variants instead of custom-styling from sc
   - Link-style for navigational CTA.
 
 Example:
+
 ```tsx
 <Button>Primary</Button>
 <Button variant="secondary">Secondary</Button>
@@ -81,11 +87,13 @@ Example:
 ```
 
 ### Card
+
 - Component: [`Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`](src/components/ui/card.tsx)
-- Defaults: `bg-card text-card-foreground rounded-xl border shadow-sm`
+- Defaults: `bg-card text-card-foreground rounded-xl border drop-shadow-sm`
 - Use cards for grouped content; keep header concise with `CardTitle` and `CardDescription`.
 
 ### Sidebar
+
 - Component suite: [`Sidebar` et al.](src/components/ui/sidebar.tsx)
 - Variants: `sidebar | floating | inset`
 - Collapsible: `offcanvas | icon | none`
@@ -94,14 +102,17 @@ Example:
   - Inset/floating for dashboard-like shells; default for app chrome.
 
 ### Sheet (Drawer)
+
 - Component: [`Sheet`](src/components/ui/sheet.tsx)
 - Use for transient, focused tasks (filters, quick edits). Choose `side` appropriately.
 
 ### Dialogs
+
 - Alert Dialog: [`AlertDialog`](src/components/ui/alert-dialog.tsx) for confirmations, especially destructive actions.
 - Dropdowns: [`DropdownMenu`](src/components/ui/dropdown-menu.tsx) for small action menus; keep items short and clear.
 
 ### Forms
+
 - Components: [`FormDescription`, `FormMessage`, etc.](src/components/ui/form.tsx)
 - Use `text-muted-foreground` for descriptions, `text-destructive` for errors.
 - Ensure keyboard navigation and clear focus indication.
@@ -109,25 +120,25 @@ Example:
 ## Patterns and examples
 
 - Surface + content:
+
 ```tsx
 // Card surface with neutral body copy
 <Card>
-  <CardHeader>
-    <CardTitle>Title</CardTitle>
-    <CardDescription className="text-muted-foreground">
-      Supporting copy
-    </CardDescription>
-  </CardHeader>
-  <CardContent className="px-6">
-    {/* content */}
-  </CardContent>
-  <CardFooter className="px-6">
-    <Button>Action</Button>
-  </CardFooter>
+	<CardHeader>
+		<CardTitle>Title</CardTitle>
+		<CardDescription className="text-muted-foreground">
+			Supporting copy
+		</CardDescription>
+	</CardHeader>
+	<CardContent className="px-6">{/* content */}</CardContent>
+	<CardFooter className="px-6">
+		<Button>Action</Button>
+	</CardFooter>
 </Card>
 ```
 
 - Theming tokens in utilities:
+
 ```html
 <div class="bg-primary-500 text-primary-foreground">Brand</div>
 <div class="text-neutral-700">Body text</div>
@@ -149,4 +160,4 @@ Example:
    - Map to Tailwind: `--color-<group>-<scale>: var(--<group>-<name>-<scale>)`.
 3. Use the new tokens via Tailwind utilities (`bg-<group>-<scale>`, `text-<group>-<scale>`).
 
---------------
+---

@@ -3,7 +3,6 @@
 - Prefer responsive layouts with Flexbox and Grid; avoid absolute positioning unless necessary.
 - Keep components small, cohesive, and accessible (use semantic HTML, aria-\* and focus states).
 - Use the provided color palette tokens only—do not hardcode hex values.
-- Support light and dark themes. The `.dark` class on a parent enables dark mode.
 - Refactor as you go; keep shared helpers and components in their own files.
 - Use Lucide icons via the shared enum [`ICONS`](src/constants/icons.enum.tsx).
 
@@ -13,8 +12,8 @@
 
 Design tokens and Tailwind theme values are sourced from:
 
-- Color palette JSON: [design/color-pallette.json](design/color-pallette.json)
-- Tailwind token mapping and CSS variables: [src/index.css](src/index.css)
+- Color palette JSON: [../design/color-pallette.json](../design/color-pallette.json)
+- Tailwind token mapping and CSS variables: [../src/app/global.css](../src/app/globals.css)
 
 ## Color
 
@@ -44,15 +43,9 @@ Examples:
 - Section surface: `class="bg-card text-card-foreground border"`
 - Subtle feedback: `class="bg-feedback-warning/15 text-feedback-warning"`
 
-Dark mode:
-
-- Wrap the app (or a layout root) with `.dark` to enable the dark token set:
-  - Example: `class="dark:bg-background dark:text-foreground"`
-  - Custom variant support exists via `@custom-variant dark (&:is(.dark *));` in [src/index.css](src/index.css)
-
 ## Typography
 
-- Base font family is set globally in [src/index.css](src/index.css).
+- Base font family is set globally in [../src/app/globals.css](../src/app/globals.css).
 - Use Tailwind utilities for scale (`text-sm`, `text-base`, `text-lg`, etc.).
 - Muted text: `text-muted-foreground`.
 - Titles: prefer semantic elements and shadcn component title slots where provided.
@@ -124,16 +117,16 @@ Example:
 ```tsx
 // Card surface with neutral body copy
 <Card>
-	<CardHeader>
-		<CardTitle>Title</CardTitle>
-		<CardDescription className="text-muted-foreground">
-			Supporting copy
-		</CardDescription>
-	</CardHeader>
-	<CardContent className="px-6">{/* content */}</CardContent>
-	<CardFooter className="px-6">
-		<Button>Action</Button>
-	</CardFooter>
+  <CardHeader>
+    <CardTitle>Title</CardTitle>
+    <CardDescription className="text-muted-foreground">
+      Supporting copy
+    </CardDescription>
+  </CardHeader>
+  <CardContent className="px-6">{/* content */}</CardContent>
+  <CardFooter className="px-6">
+    <Button>Action</Button>
+  </CardFooter>
 </Card>
 ```
 
@@ -145,17 +138,16 @@ Example:
 <div class="bg-feedback-success/15 text-feedback-success">Saved</div>
 ```
 
-## Do / Don’t
+## Do / Don't
 
 - Do use Tailwind token classes (e.g., `bg-primary-600`) over raw hex.
-- Do respect dark mode and contrast; verify states in both themes.
-- Don’t introduce new colors outside the palette; update [design/color-pallette.json](design/color-pallette.json) and map in [src/index.css](src/index.css) instead.
-- Don’t overload screens with multiple primary CTAs.
+- Don't introduce new colors outside the palette; update [design/color-pallette.json](design/color-pallette.json) and map in [src/index.css](src/index.css) instead.
+- Don't overload screens with multiple primary CTAs.
 
 ## Updating the palette
 
-1. Edit [design/color-pallette.json](design/color-pallette.json).
-2. Ensure variables in [src/index.css](src/index.css) map the new tokens:
+1. Edit [../design/color-pallette.json](../design/color-pallette.json).
+2. Ensure variables in [../src/app/globals.css](../src/app/globals.css) map the new tokens:
    - Define `--<group>-<name>-<scale>` (e.g., `--primary-blue-500`).
    - Map to Tailwind: `--color-<group>-<scale>: var(--<group>-<name>-<scale>)`.
 3. Use the new tokens via Tailwind utilities (`bg-<group>-<scale>`, `text-<group>-<scale>`).

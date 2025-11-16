@@ -47,6 +47,19 @@ npx shadcn@latest add [component-name]
 
 This automatically installs the component to `src/components/ui/` with proper theming. Always prefer adding official ShadCN components over custom implementations.
 
+## Use lucid-react for Icons
+
+All icons must be imported from the centralized `ICONS` enum in `src/constants/icons.enum.tsx`. This enum exports commonly used Lucide icons as JSX elements.
+if you need a new icon, add it to the `ICONS` enum like so:
+
+```tsx
+import { IconName } from "lucide-react";
+export const ICONS = {
+  NEW_ICON: <IconName />,
+  // ...other icons
+};
+```
+
 ### ShadCN UI Theme Customization
 
 When styling ShadCN UI components, **always reference the project's color palette** defined in:

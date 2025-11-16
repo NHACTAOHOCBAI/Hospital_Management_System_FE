@@ -1,29 +1,49 @@
 import { RegisterForm } from "@/components/auth/register-form";
-import { Hospital } from "lucide-react";
-import Image from "next/image";
+import { ICONS } from "@/constants/icons.enum";
+
 export default function Register() {
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-x-hidden overflow-y-auto">
-      <Image
-        src={"/assets/BackGround.jpg"}
-        alt="Hospital backdrop"
-        fill
-        priority
-        className="object-cover -z-20"
+    <div
+      className="relative min-h-screen w-full bg-white"
+      data-name="Register Page"
+    >
+      {/* Base gradient layer */}
+      <div className="absolute inset-0 bg-gradient-to-br from-sky-100 via-white to-teal-50" />
+
+      {/* Radial overlays for depth - matching Figma design */}
+      <div
+        className="absolute inset-0 opacity-30"
+        style={{
+          background: `radial-gradient(circle at 20% 30%, rgba(125,211,252,1) 0%, rgba(94,158,189,0.75) 12.5%, rgba(63,106,126,0.5) 25%, rgba(31,53,63,0.25) 37.5%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(20,184,166,1) 0%, rgba(15,138,125,0.75) 12.5%, rgba(10,92,83,0.5) 25%, rgba(5,46,42,0.25) 37.5%, transparent 50%)`,
+        }}
       />
-      <div className="fixed inset-0 -z-10" />
-      <div className="relative z-10 w-full max-w-md px-4 py-6 sm:px-6 sm:py-8 md:max-w-lg md:py-10">
-        <div className="flex flex-col items-center gap-3 text-center sm:gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 shadow-[0_4px_15px_rgba(37,99,235,0.45)] sm:h-14 sm:w-14">
-            <Hospital className="h-7 w-7 text-white sm:h-8 sm:w-8" />
-          </div>
-          <div className="flex flex-col items-center gap-1.5 sm:gap-2">
-            <p className="min-w-[233px] text-balance text-base font-semibold text-slate-900 sm:text-lg">
+
+      {/* Subtle pattern overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgb(0 0 0) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      {/* Content Container */}
+      <div className="relative z-10 flex min-h-screen w-full items-center justify-center py-8">
+        <div className="flex w-full max-w-md flex-col items-center justify-center gap-5 px-4">
+          {/* Header with Icon and Title */}
+          <div className="flex flex-col items-center justify-center gap-4">
+            <div className="flex size-14 items-center justify-center rounded-3xl bg-sky-600 p-3 text-white shadow-[0px_1px_4px_0px_rgba(0,0,0,0.15)]">
+              {ICONS.HOSPITAL}
+            </div>
+            <h1 className="text-center text-base font-normal leading-6 tracking-[-0.3125px] text-neutral-950">
               Hospital Management System
-            </p>
+            </h1>
           </div>
+
+          {/* Register Form Card */}
+          <RegisterForm />
         </div>
-        <RegisterForm className="mt-4 w-full sm:mt-5" />
       </div>
     </div>
   );

@@ -45,7 +45,7 @@ Available components: `Button`, `Input`, `Card`, `Sheet`, `Sidebar`, `Alert`, `D
 npx shadcn@latest add [component-name]
 ```
 
-This automatically installs the component to `src/components/ui/` with proper theming. Always prefer adding official ShadCN components over custom implementations.
+This automatically installs the component to `src/components/ui/` with default theming. Always prefer adding official ShadCN components over custom implementations.
 
 ## Use lucid-react for Icons
 

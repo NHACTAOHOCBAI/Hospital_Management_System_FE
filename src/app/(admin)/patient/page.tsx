@@ -43,6 +43,7 @@ import { toast } from "sonner";
 import { Trash2, Plus, Filter, ArrowLeft, ChevronDown } from "lucide-react";
 import { usePatients, useDeletePatients } from "@/hooks/queries/usePatient";
 import { patientColumns } from "./patient-columns";
+import { useRouter } from "next/navigation";
 
 export default function Patients() {
   const { mutate: deletePatients } = useDeletePatients();
@@ -50,6 +51,7 @@ export default function Patients() {
   const [deletedItems, setDeletedItems] = React.useState<number[]>([]);
   const [openCreate, setOpenCreate] = React.useState(false);
   const [patientGender, setPatientGender] = React.useState("Male");
+  const router = useRouter();
 
   // Filter states
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -58,9 +60,15 @@ export default function Patients() {
   const [ageMin, setAgeMin] = React.useState("");
   const [ageMax, setAgeMax] = React.useState("");
 
+  const handleNavigate = React.useCallback(
+    (id: number) => router.push(`/patient/${id}`),
+    [router]
+  );
+  const columns = React.useMemo(() => patientColumns(handleNavigate), [handleNavigate]);
+
   const { table, isFetching, setFilter, setPagination } = useTable<Patient>({
     use: usePatients,
-    columns: patientColumns(),
+    columns,
   });
 
   const openDeleteDialog = () => {
@@ -235,8 +243,9 @@ export default function Patients() {
           <div className="overflow-hidden rounded-md border">
             <CustomTable
               onLoading={isFetching}
-              columns={patientColumns()}
+              columns={columns}
               table={table}
+              onRowDoubleClick={(row) => handleNavigate(row.original.id)}
             />
           </div>
           <div className="py-4">

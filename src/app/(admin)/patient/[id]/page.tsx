@@ -132,13 +132,26 @@ const mockPatient = {
   ],
 };
 
+type PatientRouteParams =
+  | { id?: string }
+  | Promise<{ id?: string }>
+  | undefined;
+
 export default function PatientDetail({
   params,
+  searchParams: _searchParams, // included for compatibility with Next PageProps
 }: {
-  params: { id: string };
+  params?: PatientRouteParams;
+  searchParams?: unknown;
 }) {
   const [activeTab, setActiveTab] = React.useState<string>("personal");
   const patient = mockPatient;
+  const resolvedId = React.useMemo(() => {
+    if (!params) return "";
+    // Handle possible Promise typing from Next type check while keeping runtime object usage
+    if (typeof (params as any)?.then === "function") return "";
+    return (params as { id?: string }).id ?? "";
+  }, [params]);
 
   return (
     <div className="relative flex min-h-screen flex-col bg-muted/20">
@@ -152,7 +165,7 @@ export default function PatientDetail({
             </Link>
           </Button>
           <span className="text-sm text-muted-foreground">
-            Patient ID: {params.id}
+            Patient ID: {resolvedId || mockPatient.id}
           </span>
         </div>
         <div className="flex items-center gap-2">

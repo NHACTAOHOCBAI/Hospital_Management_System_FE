@@ -20,7 +20,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
 import { cn } from "@/libs/utils";
 
 const TABS = [
@@ -139,17 +138,15 @@ type PatientRouteParams =
 
 export default function PatientDetail({
   params,
-  searchParams: _searchParams, // included for compatibility with Next PageProps
 }: {
   params?: PatientRouteParams;
-  searchParams?: unknown;
 }) {
   const [activeTab, setActiveTab] = React.useState<string>("personal");
   const patient = mockPatient;
   const resolvedId = React.useMemo(() => {
     if (!params) return "";
     // Handle possible Promise typing from Next type check while keeping runtime object usage
-    if (typeof (params as any)?.then === "function") return "";
+    if (typeof (params as { then?: unknown })?.then === "function") return "";
     return (params as { id?: string }).id ?? "";
   }, [params]);
 

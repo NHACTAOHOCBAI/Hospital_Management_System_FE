@@ -10,13 +10,9 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
-export const patientColumns = (): ColumnDef<Patient>[] => {
-  const handleUpdate = (item: Patient) => {
-    console.log(`Updated patient ${item.fullName}`);
-  };
-  const handleViewDetails = (item: Patient) => {
-    console.log(`View details for patient ${item.fullName}`);
-  };
+export const patientColumns = (
+  onNavigate: (id: number) => void
+): ColumnDef<Patient>[] => {
 
   return [
     {
@@ -113,14 +109,14 @@ export const patientColumns = (): ColumnDef<Patient>[] => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
               <DropdownMenuItem
-                onClick={() => handleViewDetails(item)}
+                onClick={() => onNavigate(item.id)}
                 className="gap-2"
               >
                 <span className="text-blue-600">👁️</span>
                 View Details
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={() => handleUpdate(item)}
+                onClick={() => onNavigate(item.id)}
                 className="gap-2"
               >
                 <span className="text-yellow-600">✏️</span>

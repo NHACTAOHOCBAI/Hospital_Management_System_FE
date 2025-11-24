@@ -1,13 +1,14 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/table/table"
-import { type ColumnDef, flexRender } from "@tanstack/react-table"
+import { type ColumnDef, type Row, flexRender } from "@tanstack/react-table"
 import { Loader } from "lucide-react"
 
 interface CustomTableProps<TData> {
     table: import("@tanstack/table-core").Table<TData>,
     columns: ColumnDef<TData>[],
-    onLoading?: boolean
+    onLoading?: boolean,
+    onRowDoubleClick?: (row: Row<TData>) => void
 }
-const CustomTable = <TData,>({ table, columns, onLoading = false }: CustomTableProps<TData>) => {
+const CustomTable = <TData,>({ table, columns, onLoading = false, onRowDoubleClick }: CustomTableProps<TData>) => {
     return (
         <Table>
             <TableHeader>
@@ -43,6 +44,7 @@ const CustomTable = <TData,>({ table, columns, onLoading = false }: CustomTableP
                             table.getRowModel().rows.map((row) => (
                                 <TableRow
                                     key={row.id}
+                                    onDoubleClick={() => onRowDoubleClick?.(row)}
                                     data-state={row.getIsSelected() && "selected"}
                                 >
                                     {row.getVisibleCells().map((cell) => (

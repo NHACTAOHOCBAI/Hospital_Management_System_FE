@@ -5,8 +5,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
@@ -15,9 +13,6 @@ import { MoreHorizontal } from "lucide-react";
 export const patientColumns = (): ColumnDef<Patient>[] => {
   const handleUpdate = (item: Patient) => {
     console.log(`Updated patient ${item.fullName}`);
-  };
-  const handleDelete = (id: number) => {
-    console.log(`Deleted patient ${id}`);
   };
   const handleViewDetails = (item: Patient) => {
     console.log(`View details for patient ${item.fullName}`);

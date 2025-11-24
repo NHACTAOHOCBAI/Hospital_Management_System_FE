@@ -99,7 +99,7 @@ export default function Patients() {
 
   const handleApplyFilters = () => {
     // Combine all filters into search query
-    let combinedFilter = searchQuery;
+    const combinedFilter = searchQuery;
     // Note: In a real implementation, these filters would be sent to backend
     // For now, we'll just use the search query
     setFilter(combinedFilter);

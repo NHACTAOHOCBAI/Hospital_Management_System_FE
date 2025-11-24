@@ -13,15 +13,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Sheet,
   SheetClose,
@@ -31,6 +22,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Collapsible,
   CollapsibleContent,
@@ -58,11 +58,10 @@ export default function Patients() {
   const [ageMin, setAgeMin] = React.useState("");
   const [ageMax, setAgeMax] = React.useState("");
 
-  const { table, isFetching, filter, setFilter, setPagination } =
-    useTable<Patient>({
-      use: usePatients,
-      columns: patientColumns(),
-    });
+  const { table, isFetching, setFilter, setPagination } = useTable<Patient>({
+    use: usePatients,
+    columns: patientColumns(),
+  });
 
   const openDeleteDialog = () => {
     const items = table
